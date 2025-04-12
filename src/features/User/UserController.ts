@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express'
+import UserService from './UserService'
 
 class UserController {
-  constructor() {}
+  private userService = new UserService()
 
   createUser = async (
     request: Request,
@@ -10,10 +11,12 @@ class UserController {
   ) => {
     try {
       const body = request.body
-      console.log('Request body:', body)
+
+      const createUser = await this.userService.createUser(body)
+
       response.status(200).json({
         message: 'Usuário criado com sucesso!',
-        data: body
+        createUser
       })
     } catch (error) {
       next(error)
