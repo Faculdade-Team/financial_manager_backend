@@ -1,4 +1,3 @@
-import { User } from '@prisma/client'
 import BaseRepository from '../../base/BaseRepository'
 import UserModel from './UserModel'
 

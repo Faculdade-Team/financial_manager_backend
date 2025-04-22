@@ -6,6 +6,12 @@ import ErrorHandler from './middlewares/ErrorHandler'
 dotenv.config()
 
 const app: Express = express()
+const cors = require('cors')
+
+// Permitir requisições do frontend
+app.use(cors({
+  origin: 'http://localhost:4000',
+}));
 
 app.use(express.json())
 
