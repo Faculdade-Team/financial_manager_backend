@@ -12,6 +12,10 @@ class UserRouter {
 
   initializeRoutes() {
     this.router.post('/create', this.userController.createUser)
+    this.router.post('/login', this.userController.loginUser)
+    this.router.get('/profile', this.userController.getProfile)
+    this.router.patch('/deposit', this.userController.deposit)
+    this.router.patch('/withdraw', this.userController.withdraw)
   }
 
   getRouter() {

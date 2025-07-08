@@ -13,6 +13,6 @@ DATABASE_URL="mysql://root:97332096aA**@localhost:3306/adoptionpets"
 JWT_SECRET="92cf2d6971d9b0294f9aec629b2cdd5e24982224c1d5e4fefec94842851cb2d33c86e90195e2a885cd144672b8a6ef8f3c8701bef9ec9fb986865198306933f2"
 
 
-yarn prisma migrate dev --name init
+yarn prisma migrate dev --name init 
 
 yarn prisma migrate dev --name update

@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import UnauthRouter from './ApplicationRouter/UnauthRouter'
 import AuthRouter from './ApplicationRouter/AuthRouter'
+import AuthenticationMiddleware from '../middlewares/Authentication'
 
 class ApplicationRouter {
   private router: Router
@@ -12,7 +13,11 @@ class ApplicationRouter {
 
   private initializeRoutes() {
     this.router.use('/unauth', UnauthRouter)
-    this.router.use('/auth', AuthRouter)
+    this.router.use(
+      '/auth',
+      AuthenticationMiddleware.authenticateJWT,
+      AuthRouter
+    )
   }
 
   public getRouter() {

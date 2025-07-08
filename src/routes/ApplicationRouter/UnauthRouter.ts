@@ -12,7 +12,7 @@ class UnauthRouter {
   }
 
   private initializeRoutes() {
-    this.router.use('/user', this.userRouter.getRouter())
+    this.router.use('/users', this.userRouter.getRouter())
   }
 
   public getRouter() {
