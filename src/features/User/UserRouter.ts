@@ -16,6 +16,8 @@ class UserRouter {
     this.router.get('/profile', this.userController.getProfile)
     this.router.patch('/deposit', this.userController.deposit)
     this.router.patch('/withdraw', this.userController.withdraw)
+    this.router.patch('/payment', this.userController.payment)
+    this.router.patch('/receive', this.userController.receivePayment)
   }
 
   getRouter() {

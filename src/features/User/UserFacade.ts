@@ -48,6 +48,23 @@ class UserFacade {
     this.logger.info(`Saque realizado para usuário ${userId}: R$${value}`)
     return updatedUser
   }
+
+  async payment(userId: number, paymentId: number, value: number) {
+    const updatedUser = await this.service.payment(userId, value)
+    await this.service.deletePayment(paymentId)
+    this.logger.info(`Pagamento realizado para usuário ${userId}: R$${value}`)
+    return updatedUser
+  }
+
+  async receivePayment(userId: number, receivableId: number, value: number) {
+    const updatedUser = await this.service.receivePayment(
+      userId,
+      receivableId,
+      value
+    )
+    this.logger.info(`Pagamento recebido para usuário ${userId}: R$${value}`)
+    return updatedUser
+  }
 }
 
 export default UserFacade

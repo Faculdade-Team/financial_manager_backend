@@ -2,10 +2,12 @@ import AccountsPayableModel from './AccountsPayableModel'
 import AccountsPayableService from './AccountsPayableService'
 import { ConsoleLoggerAdapter } from '../../utils/ConsoleLoggerAdapter'
 import { AccountsPayableValidator } from './AccountsPayableValidator'
+import AccountsPayableRepository from './AccountsPayableRepository'
 
 class AccountsPayableFacade {
   private service = new AccountsPayableService()
   private logger = new ConsoleLoggerAdapter()
+  private repository = new AccountsPayableRepository()
 
   async create(data: any) {
     AccountsPayableValidator.validateCreate(data)
@@ -17,9 +19,18 @@ class AccountsPayableFacade {
     return result
   }
 
-  //   async list(userId: number) {
-  //     return await this.service.listByUser(userId)
-  //   }
+  async list(userId: number) {
+    return await this.repository.findAllByUserId(userId)
+  }
+
+  async delete(id: number) {
+    const account = await this.repository.findById(id)
+    if (!account) {
+      throw new Error('Conta a pagar não encontrada')
+    }
+    await this.service.delete(id)
+    this.logger.info(`Conta a pagar deletada: ${account.description}`)
+  }
 
   // Outros métodos podem ser adicionados aqui (pagar, cancelar, etc)
 }

@@ -10,6 +10,10 @@ class AccountsPayableService {
       await this.accountsPayableRepository.create(data)
     return createdAccountsPayable
   }
+
+  async delete(id: number): Promise<void> {
+    await this.accountsPayableRepository.delete(id)
+  }
 }
 
 export default AccountsPayableService

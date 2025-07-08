@@ -7,6 +7,7 @@ class AccountsReceivableModel {
   status: string
   observations: string
   userId: number
+  value: number
 
   constructor(data: {
     description: string
@@ -16,6 +17,7 @@ class AccountsReceivableModel {
     status: string
     observations: string
     userId: number
+    value: number
     id?: number
   }) {
     this.id = data.id
@@ -26,6 +28,7 @@ class AccountsReceivableModel {
     this.status = data.status
     this.observations = data.observations
     this.userId = data.userId
+    this.value = data.value
   }
 
   static create(data: {
@@ -36,6 +39,7 @@ class AccountsReceivableModel {
     status: string
     observations: string
     userId: number
+    value: number
     id?: number
   }): AccountsReceivableModel {
     if (
@@ -44,7 +48,8 @@ class AccountsReceivableModel {
       !data.receiptDate ||
       !data.formOfReceipt ||
       !data.status ||
-      !data.userId
+      !data.userId ||
+      !data.value
     ) {
       throw new Error(
         'Dados obrigatórios faltando para criar AccountsReceivableModel'
@@ -53,6 +58,10 @@ class AccountsReceivableModel {
 
     if (data.receiptDate) {
       data.receiptDate = new Date(data.receiptDate).toISOString()
+    }
+
+    if (data.value) {
+      data.value = Number(data.value)
     }
     return new AccountsReceivableModel(data)
   }

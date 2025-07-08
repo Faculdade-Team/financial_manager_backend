@@ -9,6 +9,7 @@ class AccountsPayableModel {
   status: string
   observations: string
   userId: number
+  value: number
 
   constructor(data: {
     description: string
@@ -18,6 +19,7 @@ class AccountsPayableModel {
     status: string
     observations: string
     userId: number
+    value: number
     id?: number
   }) {
     this.id = data.id
@@ -28,6 +30,7 @@ class AccountsPayableModel {
     this.status = data.status
     this.observations = data.observations
     this.userId = data.userId
+    this.value = data.value
   }
 
   static create(data: {
@@ -38,6 +41,7 @@ class AccountsPayableModel {
     status: string
     observations: string
     userId: number
+    value: number
     id?: number
   }): AccountsPayableModel {
     if (
@@ -46,7 +50,8 @@ class AccountsPayableModel {
       !data.paymentDate ||
       !data.paymentMethod ||
       !data.status ||
-      !data.userId
+      !data.userId ||
+      !data.value
     ) {
       throw new Error(
         'Dados obrigatórios faltando para criar AccountsPayableModel'
@@ -55,6 +60,10 @@ class AccountsPayableModel {
 
     if (data.paymentDate) {
       data.paymentDate = new Date(data.paymentDate).toISOString()
+    }
+
+    if (data.value) {
+      data.value = Number(data.value)
     }
     return new AccountsPayableModel(data)
   }

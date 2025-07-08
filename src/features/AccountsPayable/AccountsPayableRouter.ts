@@ -15,6 +15,9 @@ class AccountsPayableRouter {
       '/create',
       this.accountsPayableController.createAccountsPayable
     )
+
+    this.router.get('/list', this.accountsPayableController.list)
+    this.router.delete('/delete/:id', this.accountsPayableController.delete)
   }
 
   getRouter() {

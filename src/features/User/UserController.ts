@@ -117,6 +117,62 @@ class UserController {
       next(error)
     }
   }
+
+  payment = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const userId = request?.user?.id
+      const { value, paymentId } = request.body
+
+      if (value <= 0) {
+        return response.status(400).json({ message: 'Valor inválido.' })
+      }
+
+      const updatedUser = await this.facade.payment(
+        userId as number,
+        paymentId,
+        value
+      )
+
+      response.status(200).json({
+        message: 'Pagamento realizado com sucesso!',
+        user: updatedUser
+      })
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  receivePayment = async (
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const userId = request?.user?.id
+      const { value, receivableId } = request.body
+
+      if (value <= 0) {
+        return response.status(400).json({ message: 'Valor inválido.' })
+      }
+
+      const updatedUser = await this.facade.receivePayment(
+        userId as number,
+        receivableId,
+        value
+      )
+
+      response.status(200).json({
+        message: 'Pagamento recebido com sucesso!',
+        user: updatedUser
+      })
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 export default UserController
