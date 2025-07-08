@@ -1,8 +1,12 @@
 import { NextFunction, Request, Response } from 'express'
 import UserService from './UserService'
+import { ConsoleLoggerAdapter } from '../../utils/ConsoleLoggerAdapter'
+import UserFacade from './UserFacade'
 
 class UserController {
   private userService = new UserService()
+  private logger = new ConsoleLoggerAdapter()
+  private facade = new UserFacade()
 
   createUser = async (
     request: Request,
@@ -11,12 +15,11 @@ class UserController {
   ) => {
     try {
       const body = request.body
-
-      const createUser = await this.userService.createUser(body)
-
+      console.log('Dados recebidos para criação de usuário:', body)
+      const createdUser = await this.facade.createUser(body)
       response.status(200).json({
         message: 'Usuário criado com sucesso!',
-        createUser
+        createdUser
       })
     } catch (error) {
       next(error)

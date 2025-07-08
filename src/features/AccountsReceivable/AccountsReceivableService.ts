@@ -1,13 +1,12 @@
 import AccountsReceivableModel from './AccountsReceivableModel'
 import AccountsReceivableRepository from './AccountsReceivableRepository'
+import { AccountsReceivableValidator } from './AccountsReceivableValidator'
 
 class AccountsReceivableService {
   private accountsReceivableRepository = new AccountsReceivableRepository()
 
   create = async (data: AccountsReceivableModel) => {
-    console.log('Creating accounts receivable with data:', data)
-    const accountsReceivable = AccountsReceivableModel.create(data)
-    return this.accountsReceivableRepository.create(accountsReceivable)
+    return this.accountsReceivableRepository.create(data)
   }
 }
 

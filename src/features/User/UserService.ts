@@ -1,23 +1,17 @@
 import { AuthUtils } from '../../utils/AuthUtils'
 import UserModel from './UserModel'
 import UserRepository from './UserRepository'
+import { UserValidator } from './UserValidator'
 import { UserWithTokenDecorator } from './UserWithTokenDecorator'
 
 class UserService {
   userRepository = new UserRepository()
 
-  createUser = async (user: any) => {
-    const userModel = await UserModel.create(
-      user.name,
-      user.email,
-      user.password,
-      user.confirmPassword
-    )
-
+  createUser = async (user: UserModel) => {
     const createdUser = await this.userRepository.create({
-      name: userModel.name,
-      email: userModel.email,
-      password: userModel.password
+      name: user.name,
+      email: user.email,
+      password: user.password
     })
     return createdUser
   }
