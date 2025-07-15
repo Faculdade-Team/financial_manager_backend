@@ -8,6 +8,7 @@ describe('AccountsPayableModel', () => {
       paymentDate: '2025-07-24',
       paymentMethod: 'boleto',
       status: 'pending',
+      value: 200,
       observations: 'mensal',
       userId: 1
     }
@@ -24,6 +25,7 @@ describe('AccountsPayableModel', () => {
       paymentMethod: '',
       status: '',
       observations: '',
+      value: 0,
       userId: undefined as any
     }
     expect(() => AccountsPayableModel.create(data)).toThrow()

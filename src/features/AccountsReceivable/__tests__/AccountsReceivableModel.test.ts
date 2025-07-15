@@ -9,6 +9,7 @@ describe('AccountsReceivableModel', () => {
       formOfReceipt: 'pix',
       status: 'pending',
       observations: 'Frontend',
+      value: 1500,
       userId: 1
     }
     const model = AccountsReceivableModel.create(data)
@@ -24,6 +25,7 @@ describe('AccountsReceivableModel', () => {
       formOfReceipt: '',
       status: '',
       observations: '',
+      value: 0,
       userId: undefined as any
     }
     expect(() => AccountsReceivableModel.create(data)).toThrow()
